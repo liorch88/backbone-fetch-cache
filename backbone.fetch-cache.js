@@ -137,21 +137,21 @@
     if (_.isFunction(key)) {
       key = key();
     } else if (key && _.isObject(key)) {
-      key = getCacheKey(key, opts);
+      key = Backbone.fetchCache.getCacheKey(key, opts);
     }
 
     return Backbone.fetchCache._cache[key];
   }
 
   function getLastSync(key, opts) {
-    return getCache(key).lastSync;
+    return Backbone.fetchCache.getCache(key).lastSync;
   }
 
   function clearItem(key, opts) {
     if (_.isFunction(key)) {
       key = key();
     } else if (key && _.isObject(key)) {
-      key = getCacheKey(key, opts);
+      key = Backbone.fetchCache.getCacheKey(key, opts);
     }
     delete Backbone.fetchCache._cache[key];
     Backbone.fetchCache.setLocalStorage();
@@ -189,7 +189,7 @@
     }
     opts = _.defaults(opts || {}, { parse: true });
     var key = Backbone.fetchCache.getCacheKey(this, opts),
-        data = getCache(key),
+        data = Backbone.fetchCache.getCache(key),
         expired = false,
         prefillExpired = false,
         attributes = false,
@@ -294,7 +294,7 @@
 
     opts = _.defaults(opts || {}, { parse: true });
     var key = Backbone.fetchCache.getCacheKey(this, opts),
-        data = getCache(key),
+        data = Backbone.fetchCache.getCache(key),
         expired = false,
         prefillExpired = false,
         attributes = false,
